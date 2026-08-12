@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bob-orange: #f37021;
+    --bob-orange-light: #ff8c47;
+    --bob-orange-dark: #cc5610;
+    --bob-blue: #0033a0;
+    --bob-blue-light: #1a53cc;
+    --bob-blue-dark: #001f66;
+    --bg-color: #f0f3f8; /* Soft blueish grey background */
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: #333;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+}
+
+@layer components {
+  /* Claymorphism base class */
+  .clay-card {
+    background: var(--bg-color);
+    border-radius: 24px;
+    box-shadow: 
+      8px 8px 16px #d1d5db, 
+      -8px -8px 16px #ffffff,
+      inset 4px 4px 8px rgba(255, 255, 255, 0.8),
+      inset -4px -4px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .clay-input {
+    background: #e6ecf2;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 
+      inset 4px 4px 8px #c5cbd3,
+      inset -4px -4px 8px #ffffff;
+    transition: all 0.2s ease;
+    padding: 12px 16px;
+    color: #333;
+  }
+  
+  .clay-input:focus {
+    outline: none;
+    box-shadow: 
+      inset 6px 6px 10px #c5cbd3,
+      inset -6px -6px 10px #ffffff,
+      0 0 0 3px rgba(243, 112, 33, 0.3); /* Orange focus ring */
+  }
+
+  .clay-btn {
+    background: var(--bg-color);
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 
+      4px 4px 10px rgba(0, 0, 0, 0.08), 
+      -4px -4px 10px rgba(255, 255, 255, 0.8);
+    transition: all 0.15s ease-out;
+  }
+
+  .clay-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+      6px 6px 12px rgba(0, 0, 0, 0.1), 
+      -6px -6px 12px rgba(255, 255, 255, 0.9);
+  }
+
+  .clay-btn:active {
+    transform: scale(0.97) translateY(0);
+    box-shadow: 
+      2px 2px 5px rgba(0, 0, 0, 0.08), 
+      -2px -2px 5px rgba(255, 255, 255, 0.6);
+  }
+
+  .clay-btn-orange {
+    background: var(--bob-orange);
+    color: white;
+    box-shadow: 
+      0 4px 10px rgba(243, 112, 33, 0.3),
+      inset 1px 1px 3px rgba(255, 255, 255, 0.2);
+  }
+
+  .clay-btn-orange:hover {
+    box-shadow: 
+      0 6px 14px rgba(243, 112, 33, 0.4),
+      inset 1px 1px 3px rgba(255, 255, 255, 0.3);
+  }
+
+  .clay-btn-orange:active {
+    box-shadow: 
+      0 2px 4px rgba(243, 112, 33, 0.3),
+      inset 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .clay-btn-blue {
+    background: var(--bob-blue);
+    color: white;
+    box-shadow: 
+      0 4px 10px rgba(0, 51, 160, 0.3),
+      inset 1px 1px 3px rgba(255, 255, 255, 0.1);
+  }
+
+  .clay-btn-blue:hover {
+    box-shadow: 
+      0 6px 14px rgba(0, 51, 160, 0.4),
+      inset 1px 1px 3px rgba(255, 255, 255, 0.2);
+  }
+
+  .clay-btn-blue:active {
+    box-shadow: 
+      0 2px 4px rgba(0, 51, 160, 0.3),
+      inset 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
