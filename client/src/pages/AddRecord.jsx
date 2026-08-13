@@ -8,9 +8,10 @@ export default function AddRecord() {
     rackId: '',
     shelfId: '',
     position: 'front',
-    fileTag: '',
-    accountType: 'custom'
+    fileTag: ''
   });
+
+  const [entryMethod, setEntryMethod] = useState('custom');
 
   const [customAccounts, setCustomAccounts] = useState('');
   const [rangedAccounts, setRangedAccounts] = useState({
@@ -38,7 +39,7 @@ export default function AddRecord() {
 
     let accountNumbers = [];
 
-    if (formData.accountType === 'custom') {
+    if (entryMethod === 'custom') {
       accountNumbers = customAccounts
         .split('\n')
         .map(acc => acc.trim())
@@ -217,10 +218,10 @@ export default function AddRecord() {
               <label className="flex items-center gap-2 cursor-pointer">
                 <input 
                   type="radio" 
-                  name="accountType" 
+                  name="entryMethod" 
                   value="custom" 
-                  checked={formData.accountType === 'custom'} 
-                  onChange={handleChange}
+                  checked={entryMethod === 'custom'} 
+                  onChange={(e) => setEntryMethod(e.target.value)}
                   className="w-4 h-4 text-[var(--bob-orange)]"
                 />
                 Custom (Manual entry)
@@ -228,17 +229,17 @@ export default function AddRecord() {
               <label className="flex items-center gap-2 cursor-pointer">
                 <input 
                   type="radio" 
-                  name="accountType" 
+                  name="entryMethod" 
                   value="ranged" 
-                  checked={formData.accountType === 'ranged'} 
-                  onChange={handleChange}
+                  checked={entryMethod === 'ranged'} 
+                  onChange={(e) => setEntryMethod(e.target.value)}
                   className="w-4 h-4 text-[var(--bob-blue)]"
                 />
                 Ranged (Consecutive)
               </label>
             </div>
 
-            {formData.accountType === 'custom' ? (
+            {entryMethod === 'custom' ? (
               <div className="flex flex-col gap-2">
                 <label className="text-sm text-gray-500">Enter account numbers (one per line)</label>
                 <textarea 

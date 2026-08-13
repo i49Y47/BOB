@@ -23,11 +23,7 @@ const RecordSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  accountType: {
-    type: String,
-    enum: ['custom', 'ranged'],
-    required: true
-  },
+
   accountNumbers: {
     type: [String],
     default: []

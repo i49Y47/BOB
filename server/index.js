@@ -54,7 +54,6 @@ app.post('/api/records', async (req, res) => {
       shelfId,
       position,
       fileTag,
-      accountType,
       accountNumbers,
       action = 'check'
     } = req.body;
@@ -70,7 +69,6 @@ app.post('/api/records', async (req, res) => {
       if (action === 'append') {
         existingRecord.accountNumbers = Array.from(new Set([...existingRecord.accountNumbers, ...accountNumbers]));
         existingRecord.position = position;
-        existingRecord.accountType = accountType;
         const savedRecord = await existingRecord.save();
         return res.status(200).json(savedRecord);
       }
@@ -78,7 +76,6 @@ app.post('/api/records', async (req, res) => {
       if (action === 'overwrite') {
         existingRecord.accountNumbers = accountNumbers;
         existingRecord.position = position;
-        existingRecord.accountType = accountType;
         const savedRecord = await existingRecord.save();
         return res.status(200).json(savedRecord);
       }
@@ -91,7 +88,6 @@ app.post('/api/records', async (req, res) => {
       shelfId,
       position,
       fileTag,
-      accountType,
       accountNumbers
     });
 
