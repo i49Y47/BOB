@@ -24,22 +24,57 @@ app.get('/api/records/search', async (req, res) => {
   try {
     const { accountNumber, moduleType } = req.query;
     
-    if (!accountNumber) {
-      return res.status(400).json({ error: 'Account number is required' });
-    }
-
-    const query = { accountNumbers: accountNumber };
+    let query = {};
     if (moduleType) {
       query.moduleType = moduleType;
     }
 
-    const record = await Record.findOne(query);
-    
-    if (record) {
-      res.json(record);
-    } else {
-      res.status(404).json({ error: 'Record not found for this account number' });
+    if (!accountNumber) {
+      // Empty search - return all modules sorted
+      const records = await Record.find(query).sort({ rackId: 1, shelfId: 1, fileTag: 1 });
+      const formattedRecords = records.map(r => ({
+        rackId: r.rackId,
+        shelfId: r.shelfId,
+        fileTag: r.fileTag,
+        position: r.position,
+        totalAccounts: r.accountNumbers ? r.accountNumbers.length : 0
+      }));
+      return res.json({ type: 'all', data: formattedRecords });
     }
+
+    query.accountNumbers = { $regex: '^' + accountNumber };
+    const records = await Record.find(query).sort({ rackId: 1, shelfId: 1, fileTag: 1 });
+
+    if (records.length === 0) {
+      return res.status(404).json({ error: 'Record not found for this account number' });
+    }
+
+    let matchedResults = [];
+    let exactMatchRecord = null;
+    let exactMatchFound = false;
+
+    records.forEach(record => {
+      const matchingAccs = record.accountNumbers.filter(acc => acc.startsWith(accountNumber));
+      matchingAccs.forEach(acc => {
+        matchedResults.push({
+          rackId: record.rackId,
+          shelfId: record.shelfId,
+          fileTag: record.fileTag,
+          position: record.position,
+          accountNumber: acc
+        });
+        if (acc === accountNumber) {
+          exactMatchFound = true;
+          exactMatchRecord = record;
+        }
+      });
+    });
+
+    if (exactMatchFound && matchedResults.length === 1) {
+      return res.json({ type: 'exact', data: exactMatchRecord });
+    }
+
+    return res.json({ type: 'partial', data: matchedResults });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
