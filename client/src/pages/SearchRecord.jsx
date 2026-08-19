@@ -12,7 +12,7 @@ export default function SearchRecord() {
   const handleModuleChange = (e) => {
     const newModule = e.target.value;
     setModuleType(newModule);
-    if (newModule === 'BC Module') {
+    if (newModule === 'BC Module' || newModule === 'Personal Loan') {
       setAccountNumber('071881000');
     } else {
       setAccountNumber('');
@@ -57,6 +57,7 @@ export default function SearchRecord() {
               <option value="SB Account Openings">SB Account Openings</option>
               <option value="Vouchers Files">Vouchers Files</option>
               <option value="KCC files">KCC Files</option>
+              <option value="Personal Loan">Personal Loan</option>
             </select>
           </div>
           

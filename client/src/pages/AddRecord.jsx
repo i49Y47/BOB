@@ -141,6 +141,7 @@ export default function AddRecord() {
               <option value="SB Account Openings">SB Account Openings</option>
               <option value="Vouchers Files">Vouchers Files</option>
               <option value="KCC files">KCC Files</option>
+              <option value="Personal Loan">Personal Loan</option>
             </select>
           </div>
 
