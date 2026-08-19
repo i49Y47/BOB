@@ -12,8 +12,10 @@ export default function SearchRecord() {
   const handleModuleChange = (e) => {
     const newModule = e.target.value;
     setModuleType(newModule);
-    if (newModule === 'BC Module' || newModule === 'Personal Loan') {
+    if (newModule === 'BC Module') {
       setAccountNumber('071881000');
+    } else if (newModule === 'Personal Loan') {
+      setAccountNumber('0718060000');
     } else {
       setAccountNumber('');
     }
@@ -80,6 +82,25 @@ export default function SearchRecord() {
             {status.type === 'loading' ? <Loader2 className="animate-spin" /> : 'Search'}
           </button>
         </form>
+
+        <div className="mt-6 flex justify-center">
+          <div className="inline-flex items-center gap-3 md:gap-6 px-6 py-3 bg-gray-50/80 rounded-2xl border border-gray-100 shadow-sm text-center">
+             <div>
+               <div className="font-mono font-bold text-gray-600 tracking-widest">[ 1 2 3 4 ]</div>
+               <div className="text-[11px] font-medium uppercase tracking-wider text-gray-400 mt-1">Branch Code</div>
+             </div>
+             <div className="text-gray-300 font-light text-lg">|</div>
+             <div>
+               <div className="font-mono font-bold text-gray-600 tracking-widest">[ 5 6 ]</div>
+               <div className="text-[11px] font-medium uppercase tracking-wider text-gray-400 mt-1">Product Code</div>
+             </div>
+             <div className="text-gray-300 font-light text-lg">|</div>
+             <div>
+               <div className="font-mono font-bold text-gray-600 tracking-widest">[ 7 7 6 5 4 3 2 1 ]</div>
+               <div className="text-[11px] font-medium uppercase tracking-wider text-gray-400 mt-1">Your Unique Account Number</div>
+             </div>
+          </div>
+        </div>
 
         {status.type === 'error' && (
           <div className="mt-6 p-4 bg-red-100 text-red-700 rounded-xl text-center font-medium">

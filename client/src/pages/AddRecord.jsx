@@ -249,7 +249,7 @@ export default function AddRecord() {
                   value={customAccounts}
                   onChange={(e) => setCustomAccounts(e.target.value)}
                   className="clay-input resize-none"
-                  placeholder="07188100006420&#10;07188100006423&#10;..."
+                  placeholder={formData.moduleType === 'Personal Loan' ? "07180600006420\n07180600006423\n..." : "07188100006420\n07188100006423\n..."}
                 />
               </div>
             ) : (
@@ -263,7 +263,7 @@ export default function AddRecord() {
                     value={rangedAccounts.prefix}
                     onChange={handleRangedChange}
                     className="clay-input"
-                    placeholder="e.g. 071881000"
+                    placeholder={formData.moduleType === 'Personal Loan' ? "e.g. 0718060000" : "e.g. 071881000"}
                   />
                 </div>
                 <div className="flex flex-col gap-2">
